@@ -39,6 +39,8 @@ def train_model(X_train, y_train):
 
 
 def evaluate_model(model, X_test, y_test):
+    import matplotlib.pyplot as plt
+
     predictions = model.predict(X_test)
 
     mae = mean_absolute_error(y_test, predictions)
@@ -46,6 +48,30 @@ def evaluate_model(model, X_test, y_test):
 
     print(f"MAE : {mae:.2f}")
     print(f"MSE : {mse:.2f}")
+
+    plt.figure(figsize=(14, 6))
+
+    plt.plot(
+        y_test.values,
+        label="Actual Sales",
+        linewidth=2,
+    )
+
+    plt.plot(
+        predictions,
+        label="Predicted Sales",
+        linewidth=2,
+    )
+
+    plt.title("Actual vs Predicted Sales")
+    plt.xlabel("Days")
+    plt.ylabel("Sales")
+
+    plt.legend()
+
+    plt.grid(True)
+
+    plt.show()
 
 
 def main():
